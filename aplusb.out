@@ -1,0 +1,46 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s _ -> ac _ ^
+s 1 -> t 1 >
+s 0 -> t 0 >
+t 1 -> t 1 >
+t 0 -> t 0 >
+t + -> t + >
+t 2 -> t 2 >
+t 3 -> t 3 >
+t _ -> whatIs _ <
+
+whatIs 0 -> its0 _ <
+its0 0 -> its0 0 <
+its0 1 -> its0 1 <
+its0 + -> findP0 + <
+findP0 3 -> findP0 3 < 
+findP0 2 -> findP0 2 <
+findP0 1 -> t 3 > 
+findP0 0 -> t 2 >
+findP0 _ -> t 2 >
+ 
+whatIs 1 -> its1 _ <
+its1 0 -> its1 0 <
+its1 1 -> its1 1 <
+its1 + -> findP1 + <
+findP1 3 -> findP1 3 < 
+findP1 2 -> findP1 2 <
+findP1 1 -> with1 2 <
+findP1 0 -> t 3 >
+findP1 _ -> t 3 >
+
+whatIs + -> end _ <
+
+with1 0 -> t 1 >
+with1 1 -> with1 0 <
+with1 _ -> t 1 >
+
+end 0 -> end 0 <
+end 1 -> end 1 <
+end 3 -> end 1 <
+end 2 -> end 0 <
+end _ -> ac _ >

@@ -1,0 +1,84 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 1 -> st 1 >
+s 2 -> st 2 >
+s 0 -> ac 0 ^
+st 0 -> st 0 >
+st 1 -> st 1 >
+st 2 -> st 2 >
+st _ -> s1 _ >
+
+s1 _ -> s2 _ >
+s2 _ -> s3 _ >
+s3 _ -> s4 _ >
+s4 _ -> s5 _ >
+s5 _ -> s6 _ >
+s6 _ -> s7 _ >
+s7 _ -> s8 _ >
+s8 _ -> s9 _ >
+s9 _ -> s10 _ >
+s10 _ -> s11 _ >
+s11 _ -> s12 _ >
+s12 _ -> s13 _ >
+s13 _ -> s14 _ >
+s14 _ -> s15 _ >
+s15 _ -> s16 _ >
+s16 _ -> s17 _ >
+s17 _ -> s18 _ >
+s18 _ -> s19 _ >
+s19 _ -> s20 _ >
+s20 _ -> s21 # <
+s21 _ -> nazad 1 <
+nazad _ -> nazad _ <
+
+nazad 2 -> plus 1 >
+nazad 1 -> check 0 <
+nazad 0 -> nazad 2 <
+
+check _ -> del _ >
+check 1 -> plus 1 >
+check 0 -> plus 0 >
+check 2 -> plus 2 >
+
+del 0 -> del _ >
+del 1 -> plus 1 >
+del 2 -> plus 2 >
+del _ -> out _ >
+
+plus 0 -> plus 0 >
+plus 1 -> plus 1 >
+plus 2 -> plus 2 >
+plus _ -> next _ >
+next _ -> next _ >
+next 1 -> sum 1 >
+
+sum 1 -> sum 1 >
+sum 0 -> sum 0 >
+sum # -> what # <
+
+what 0 -> done 1 <
+what 1 -> d1 0 <
+d1 0 -> done 1 <
+d1 1 -> d1 0 <
+d1 _ -> done 1 <
+
+done 1 -> done 1 <
+done 0 -> done 0 <
+done _ -> nazad _ <
+
+out _ -> out _ >
+out 1 -> end 1 >
+end 0 -> end 0 >
+end 1 -> end 1 >
+end # -> finish _ <
+finish 0 -> finish 0 <
+finish 1 -> finish 1 <
+finish _ -> ac _ >
+
+
+
+
+

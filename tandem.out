@@ -1,0 +1,68 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 1 -> right b >
+s 0 -> right a >
+
+right 1 -> right 1 >
+right 0 -> right 0 >
+right c -> whatR c < 
+right d -> whatR d <
+right _ -> whatR _ <
+
+whatR 0 -> left c <
+whatR 1 -> left d <
+whatR a -> rj a ^
+whatR b -> rj b ^
+
+left 1 -> left 1 <
+left 0 -> left 0 <
+left a -> whatL a >
+left b -> whatL b >
+left _ -> whatL _ >
+
+whatL 0 -> right a >
+whatL 1 -> right b >
+whatL c -> run c ^
+whatL d -> run d ^
+
+run c -> runC 2 <
+run d -> runD 3 <
+
+runC 0 -> wC 0 >
+runC 1 -> wC 1 >
+runC a -> runC a <
+runC b -> runC b <
+runC _ -> wC _ >
+runC 2 -> runC 2 <
+runC 3 -> runC 3 <
+
+runD 0 -> wD 0 >
+runD 1 -> wD 1 >
+runD a -> runD a <
+runD b -> runD b <
+runD _ -> wD _ >
+runD 2 -> runD 2 <
+runD 3 -> runD 3 <
+
+wC a -> fast 0 >
+wC b -> rj _ ^
+wC c -> rj _ ^
+wC d -> rj _ ^
+
+wD a -> rj _ ^
+wD b -> fast 1 >
+wD c -> rj _ ^
+wD d -> rj _ ^
+
+fast a -> fast a >
+fast b -> fast b >
+fast 0 -> fast 0 >
+fast 1 -> fast 1 >
+fast 2 -> fast 2 >
+fast 3 -> fast 3 >
+fast c -> runC 2 <
+fast d -> runD 3 <
+fast _ -> ac _ ^

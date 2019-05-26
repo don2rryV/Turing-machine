@@ -1,0 +1,74 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 1 -> q b >
+s 0 -> q a >
+q 1 -> q 1 >
+q 0 -> q 0 >
+q < -> w < >
+w a -> w a >
+w b -> w b >
+w 0 -> e a <
+w 1 -> e b <
+w _ -> rj _ ^
+e a -> e a <
+e b -> e b <
+e < -> d < <
+d 0 -> d 0 <
+d 1 -> d 1 <
+d a -> what a >
+d b -> what b > 
+what 1 -> q b >
+what 0 -> q a >
+what < -> end < >
+end 1 -> ac _ ^
+end 0 -> ac _ ^
+end a -> end a >
+end b -> end b >
+end _ -> ccc _ <
+
+ccc a -> ccc 0 <
+ccc b -> ccc 1 <
+ccc < -> ccc < <
+ccc _ -> run _ >
+
+run 1 -> comp1 _ >
+run 0 -> comp0 _ > 
+
+comp1 1 -> comp1 1 >
+comp1 0 -> comp1 0 >
+comp1 < -> after1 < >
+
+after1 1 -> left b <
+after1 0 -> rj _ ^
+after1 a -> after1 a >
+after1 b -> after1 b >
+after1 _ -> ac _ ^
+
+left 1 -> left 1 <
+left 0 -> left 0 <
+left a -> left a <
+left b -> left b <
+left < -> left < <
+left _ -> whatIs _ >
+whatIs 1 -> comp1 _ >
+whatIs 0 -> comp0 _ >
+whatIs < -> comp _ >
+
+comp0 1 -> comp0 1 >
+comp0 0 -> comp0 0 >
+comp0 < -> after0 < >
+
+after0 0 -> left a <
+after0 1 -> ac _ ^
+after0 a -> after0 a >
+after0 b -> after0 b >
+after0 _ -> ac _ ^
+
+comp _ -> rj _ ^
+comp 1 -> ac _ ^
+comp 0 -> ac _ ^
+comp a -> comp a >
+comp b -> comp b >

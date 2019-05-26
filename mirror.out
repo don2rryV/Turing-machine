@@ -1,0 +1,35 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 1 -> t 1 >
+s 0 -> t 0 >
+s _ -> ac _ ^
+t 1 -> t 1 >
+t 0 -> t 0 >
+t _ -> whatIs _ <
+
+whatIs 0 -> change0 a >
+change0 a -> change0 a >
+change0 b -> change0 b >
+change0 _ -> left a <
+
+whatIs 1 -> change1 b >
+change1 a -> change1 a >
+change1 b -> change1 b >
+change1 _ -> left b <
+
+left a -> left a <
+left b -> left b <
+left 1 -> whatIs 1 ^
+left 0 -> whatIs 0 ^
+left _ -> out _ >
+
+out a -> out 0 >
+out b -> out 1 >
+out _ -> exit _ <
+
+exit 1 -> exit 1 <
+exit 0 -> exit 0 <
+exit _ -> ac _ >

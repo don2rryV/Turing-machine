@@ -1,0 +1,235 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 1 -> sdv 1 >
+s 0 -> out0 0 >
+
+out0 0 -> out0 _ >
+out0 1 -> out0 _ >
+out0 * -> out0 _ >
+out0 _ -> exit _ <
+exit _ -> exit _ <
+exit 0 -> ac 0 ^
+
+sdv 0 -> sdv 0 >
+sdv 1 -> sdv 1 >
+sdv * -> sdv * >
+sdv _ -> s1 _ >
+s1 _ -> s2 _ >
+s2 _ -> s3 _ >
+s3 _ -> s4 _ >
+s4 _ -> s5 _ >
+s5 _ -> s6 _ >
+s6 _ -> s7 _ >
+s7 _ -> s8 _ >
+s8 _ -> s9 _ >
+s9 _ -> s10 _ >
+s10 _ -> s11 _ >
+s11 _ -> s12 _ >
+s12 _ -> s13 _ >
+s13 _ -> s14 _ >
+s14 _ -> s15 _ >
+s15 _ -> s16 _ >
+s16 _ -> s17 _ >
+s17 _ -> s18 _ >
+s18 _ -> nazad # <
+nazad _ -> nazad _ <
+nazad 0 -> m0 e <
+nazad 1 -> m1 f <
+nazad e -> nazad e <
+nazad f -> nazad f <
+
+m0 a -> m0 a >
+m0 b -> m0 b >
+m0 _ -> m0 _ >
+m0 1 -> m0 1 >
+m0 0 -> m0 0 >
+m0 3 -> m0 3 >
+m0 2 -> m0 2 >
+m0 c -> what c <
+m0 d -> what d <
+m0 e -> m0 e >
+m0 f -> m0 f >
+m0 # -> what # <
+m0 * -> end * <
+
+what 0 -> rev c <
+what 1 -> rev d <
+what _ -> rev c <
+what 2 -> rev c <
+what 3 -> rev d <
+
+rev 0 -> rev 0 <
+rev 1 -> rev 1 <
+rev 2 -> rev 2 <
+rev 3 -> rev 3 <
+rev _ -> nazad _ <
+
+m1 0 -> m1 0 <
+m1 1 -> m1 1 <
+m1 * -> u * <
+
+u 0 -> u0 a >
+u0 a -> u0 a >
+u0 b -> u0 b >
+u0 * -> u0 * >
+u0 1 -> u0 1 >
+u0 0 -> u0 0 >
+u0 2 -> u0 2 >
+u0 3 -> u0 3 >
+u0 _ -> u0 _ >
+u0 c -> p0 c <
+u0 d -> p0 d <
+u0 # -> p0 # <
+u0 f -> u0 f >
+u0 e -> u0 e >
+
+u 1 -> u1 b >
+u1 a -> u1 a >
+u1 b -> u1 b >
+u1 * -> u1 * >
+u1 1 -> u1 1 >
+u1 0 -> u1 0 >
+u1 _ -> u1 _ >
+u1 2 -> u1 2 >
+u1 3 -> u1 3 >
+u1 c -> p1 c <
+u1 d -> p1 d <
+u1 # -> p1 # <
+u1 f -> u1 f >
+u1 e -> u1 e >
+
+p0 1 -> run d <
+p0 0 -> run c <
+p0 _ -> run c <
+
+run 0 -> run 0 <  
+run 1 -> run 1 <
+run e -> run e <
+run f -> run f <
+run * -> find * <
+run _ -> run _ <
+
+find a -> find a <
+find b -> find b <
+find 0 -> z0 a >
+find 1 -> z1 b >
+find _ -> zzz _ >
+
+z0 a -> z0 a >
+z0 b -> z0 b >
+z0 * -> z0 * >
+z0 1 -> z0 1 >
+z0 0 -> z0 0 >
+z0 2 -> pz0 2 <
+z0 3 -> pz0 3 <
+z0 _ -> z0 _ >
+z0 c -> pz0 c <
+z0 d -> pz0 d <
+z0 # -> pz0 # <
+z0 f -> z0 f >
+z0 e -> z0 e >
+
+pz0 1 -> run 3 <
+pz0 0 -> run 2 <
+pz0 _ -> run 2 <
+
+z1 a -> z1 a >
+z1 b -> z1 b >
+z1 * -> z1 * >
+z1 1 -> z1 1 >
+z1 0 -> z1 0 >
+z1 _ -> z1 _ >
+z1 2 -> pz1 2 <
+z1 3 -> pz1 3 <
+z1 c -> pz1 c <
+z1 d -> pz1 d <
+z1 # -> pz1 # <
+z1 f -> z1 f >
+z1 e -> z1 e >
+
+pz1 1 -> add11 2 <
+pz1 0 -> run 3 <
+pz1 _ -> run 3 <
+
+add11 1 -> add11 0 <
+add11 0 -> run 1 <
+add11 _ -> run 1 <
+
+p1 1 -> add11 c <
+p1 0 -> run d <
+p1 _ -> run d <
+
+
+zzz a -> zzz 0 >
+zzz b -> zzz 1 >
+zzz * -> zzzz * >
+zzzz e -> end e ^
+zzzz f -> end f ^
+zzzz 0 -> y 0 >
+zzzz 1 -> y 1 >
+y 0 -> y 0 >
+y 1 -> y 1 >
+y e -> y e >
+y f -> y f >
+y _ -> chist _ >
+
+chist _ -> chist _ >
+chist 2 -> chist 0 >
+chist 3 -> chist 1 >
+chist c -> rev c <
+chist d -> rev d <
+chist 0 -> chist 0 >
+chist 1 -> chist 1 >
+
+
+end 1 -> end 1 <
+end 0 -> end 0 <
+end * -> end * <
+end a -> end a <
+end b -> end b <
+end e -> end e <
+end f -> end f <
+end _ -> out _ >
+
+out 1 -> out _ >
+out 0 -> out _ >
+out * -> out _ >
+out a -> out _ >
+out b -> out _ >
+out e -> out _ >
+out f -> out _ >
+out _ -> t _ >
+
+t 3 -> t 1 >
+t 2 -> t 0 >
+t c -> t 0 >
+t d -> t 1 >
+t _ -> t _ >
+t # -> tt _ <
+t 0 -> t 0 >
+t 1 -> t 1 >
+
+tt 1 -> tt 1 <
+tt 0 -> tt 0 <
+tt _ -> check _ >
+check _ -> ac 0 ^
+check 0 -> ac 0 ^
+check 1 -> ac 1 ^
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
